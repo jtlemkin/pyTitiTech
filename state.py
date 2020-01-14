@@ -10,3 +10,6 @@ class State(ABC):
         
     def draw(self) -> None:
         pass
+        
+    def handle_input(self) -> None:
+        pass

@@ -10,4 +10,5 @@ context = Context(StartState(win))
 
 while True:
     context.state.draw()
+    context.state.handle_input()
     win.flip()
