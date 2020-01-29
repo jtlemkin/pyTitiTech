@@ -1,15 +1,28 @@
-from abc import ABC
+from psychopy import visual
 
-class State(ABC):
-    
-    def context(self):
-        return self.context
+from button import Button
+
+class State():
+    app = None
+    background = None
+    subviews = []
         
-    def context(self, context) -> None:
-        self.context = context
+    def draw(self):
+        self.background.draw()
         
-    def draw(self) -> None:
+        for view in self.subviews:
+            view.draw()
+        
+    #This function handles click events    
+    def handle_input(self):
+        for view in self.subviews:
+            if isinstance(view, Button) and view.clicked_by(self.app.mouse):
+                view.on_click()
+        
+    def prepare_for_transition_to(self, newState):
         pass
         
-    def handle_input(self) -> None:
-        pass
+    def on_load(self):        
+        self.background = visual.Rect(self.app.win, size=(4,4), units='norm')
+        self.background.color = (0, 0, 1)
+        

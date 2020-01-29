@@ -37,14 +37,39 @@ class FileManager():
     def read_constants(self):
         constants = {}
         
-        with open(self.constants_file, "r") as f:
+        try:
+            f = open(self.constants_file, "r")
+            
+            line_no = 1
             for row in f.readlines():
+                if line_no > 7:
+                    break
+                    
+                line_no += 1
+                
                 key_value_pair = row.split(",")
+                print(key_value_pair)
                 key = key_value_pair[0]
                 value = key_value_pair[1]
-                
+                    
                 if len(key_value_pair) == 2:
-                    constants[key] = value
+                    constants[key] = float(value[:-1])
+                
+            f.close()
+        except FileNotFoundError:
+            #Return default values for configs
+            constants["negativeReinforcementDelay"] = 3.0
+            constants["positiveReinforcementDelay"] = 1.0
+            constants["holdPhaseDelay"] = 1.5
+            constants["sessionTimeoutTime"] = 480
+            constants["stopStimulusDuration"] = 1.0
+            constants["goStimulusDuration"] = 30
+            constants["maxRepeats"] = 4
                     
         return constants
+        
+    def write_constants(self, constants):
+        with open(self.constants_file, "w+") as f:
+            for key in constants:
+                f.write(f"{key},{constants[key]}\n")
         

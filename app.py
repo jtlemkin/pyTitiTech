@@ -1,8 +1,9 @@
 #exec(open('pyTitiTechnology.py').read())
 
 from psychopy import visual, event
-from subjectSelectionState import SubjectSelectionState
-from adminState import AdminState
+from States.subjectSelectionState import SubjectSelectionState
+from States.phaseSelectionState import PhaseSelectionState
+from States.adminState import AdminState
 from fileManager import FileManager
 
 class App:
@@ -12,26 +13,48 @@ class App:
     """
     
     state = None
-    win = visual.Window(size=(800,600))
+    win = visual.Window()
     mouse = event.Mouse(win)
     
-    fileManager = FileManager(subject_file = "subject-data.csv", 
-                              constants_file = "user-defined-constants.csv")
+    fileManager = FileManager(subject_file = "Constants/subject-data.csv", 
+                              constants_file = "Constants/user-defined-constants.csv")
 
     def __init__(self, state) -> None:
         self.transition_to(state)
         
-    def transition_to(self, state):
+    def transition_to(self, state_name):
+        print("transitioning to", state_name)
+        
         inits = {
             "subject" : SubjectSelectionState,
-            "admin" : AdminState
+            "admin" : AdminState,
+            "phase" : PhaseSelectionState
         }
         
-        self.state = inits[state](self)
+        newState = inits[state_name]()
 
-app = App("subject")
+        
+        if self.state:
+            self.state.prepare_for_transition_to(newState)
+            
+        self.state = newState
+        self.state.app = self
+        
+        self.state.on_load()
+        
+    def run(self):
+        while True:
+            self.state.draw()
+            self.win.flip()
+            
+            self.state.handle_input()
+            
+            if event.getKeys() and event.getKeys()[0] == 'escape':
+                break
+            
+            event.clearEvents()
+        
 
-while True:
-    app.state.draw()
-    app.state.handle_input()
-    app.win.flip()
+starting_state_name = "subject"
+app = App(starting_state_name)
+app.run()
