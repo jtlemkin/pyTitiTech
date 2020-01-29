@@ -1,10 +1,12 @@
 #exec(open('pyTitiTechnology.py').read())
-
-from psychopy import visual, event
 from States.subjectSelectionState import SubjectSelectionState
 from States.sessionState import SessionState
 from States.adminState import AdminState
+from States.shrinkingGoNoGoState import ShrinkingGoNoGoState
+
 from fileManager import FileManager
+
+from psychopy import visual, event
 
 class App:
     """
@@ -28,7 +30,8 @@ class App:
         inits = {
             "subject" : SubjectSelectionState,
             "admin" : AdminState,
-            "session" : SessionState
+            "session" : SessionState,
+            "go_signal" : ShrinkingGoNoGoState
         }
         
         newState = inits[state_name]()

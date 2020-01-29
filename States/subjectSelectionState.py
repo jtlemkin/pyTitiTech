@@ -1,9 +1,10 @@
 from state import State
 from button import Button
+
 from States.sessionState import SessionState
 from session import Session
 
-from psychopy import event, gui
+from psychopy import gui
 
 class SubjectSelectionState(State):
     subjectIDs = []

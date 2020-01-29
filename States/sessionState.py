@@ -1,8 +1,6 @@
 from state import State
-from button import Button
 
 import random
-from state import State
 
 from psychopy import core
 
@@ -28,5 +26,4 @@ class SessionState(State):
         
         self.session.save()
         print("Constants: " + self.session.formatConstantsString())
-        
     
