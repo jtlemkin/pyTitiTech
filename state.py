@@ -26,3 +26,6 @@ class State():
         self.background = visual.Rect(self.app.win, size=(4,4), units='norm')
         self.background.color = (0, 0, 1)
         
+    def on_appear(self):
+        pass
+        
