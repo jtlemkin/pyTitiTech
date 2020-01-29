@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from psychopy import core
+
 class Session:
     def __init__(self, subject, phase, fileManager):
         self.subject = subject
@@ -7,7 +9,7 @@ class Session:
         self.fileManager = fileManager
         self.constants = fileManager.read_constants()
         
-        self.start_time_stamp = datetime.now()
+        self.start_time_stamp = core.getAbsTime()
         
     def formatConstantsString(self):
         line = self.start_time_stamp + ','
@@ -22,3 +24,6 @@ class Session:
         line += self.constants["sessionTimeoutTime"] + '\n'
         
         return line
+        
+    def save(self):
+        self.fileManager.write_constants(self.constants)

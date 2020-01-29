@@ -76,7 +76,10 @@ class SubjectSelectionState(State):
             self.session = Session(selectedSubject, goNoGoSettings["Phase"], self.app.fileManager)
             
             if self.settings_are_okay():
-               self.app.transition_to("session")
+                if goNoGoSettings["Phase"] == "Go Signal":
+                    self.app.transition_to("go_signal")
+                else:
+                    self.app.transition_to("session")
             
     def settings_are_okay(self):
         sessionState = {

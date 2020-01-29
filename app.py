@@ -47,6 +47,7 @@ class App:
             self.state.draw()
             self.win.flip()
             
+            self.state.on_appear()
             self.state.handle_input()
             
             if event.getKeys() and event.getKeys()[0] == 'escape':
