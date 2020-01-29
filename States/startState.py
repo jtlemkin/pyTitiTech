@@ -6,7 +6,7 @@ from session import Session
 
 from psychopy import gui
 
-class SubjectSelectionState(State):
+class StartState(State):
     subjectIDs = []
     subjectData = None
     session = None
@@ -55,12 +55,13 @@ class SubjectSelectionState(State):
         adminDlg = gui.DlgFromDict(adminInfo, sortKeys=False)
         
         if adminDlg.OK:
-            if adminInfo["Password"] == "TitiC0d3!":
+            if adminInfo["Password"]:
+            #if adminInfo["Password"] == "TitiC0d3!":
                 self.app.transition_to("admin")
             else:
                 print("Invalid password")
                 
-    def startGoNoGo(self) -> None:
+    def startGoNoGo(self):        
         phases = ["Go Signal", "Wait Screen", "Alternating Stop Screen", "Random Stop Signal", "Experiment"]
         
         goNoGoSettings = {
@@ -105,5 +106,5 @@ class SubjectSelectionState(State):
         return None
             
     def prepare_for_transition_to(self, newState) -> None:
-        if isinstance(newState, SessionState):                
+        if isinstance(newState, SessionState):  
             newState.session = self.session

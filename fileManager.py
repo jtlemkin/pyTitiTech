@@ -4,24 +4,14 @@ class FileManager():
         self.constants_file = constants_file
     
     # Takes in an array of a subjects features
-    def write_subject_data(self, data, replace = False, source = ""):
-        if replace:
-            subject_data = read_subject_data()
-                
-            for index, subject in enumerate(subject_data):
-                #if subject id is equal to source id
-                if subject[0] == source:
-                   subject_data[index] = data
-                   break
-                        
-                write_data = ""
-                
-                for subject in subject_data:
-                    #Write id, condition, diameter as csv
-                    write_data += f"{subject[0]},{subject[1]},{subject[2]}\n"
+    def write_subject_data(self, data, overwrite = False):
+        if overwrite:
+            subject_data = self.read_subject_data()
+            
+            write_data = ''.join([f"{subject[0]},{subject[1]},{subject[2]}\n" for subject in subject_data])
                     
-                with open(self.subject_file, "w+"):
-                    f.write(write_data)
+            with open(self.subject_file, "w+") as f:
+               f.write(write_data)
         else:
             #Write id, condition, diameter as csv
             with open(self.subject_file, "a+") as f:
@@ -48,7 +38,6 @@ class FileManager():
                 line_no += 1
                 
                 key_value_pair = row.split(",")
-                print(key_value_pair)
                 key = key_value_pair[0]
                 value = key_value_pair[1]
                     

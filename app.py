@@ -1,5 +1,4 @@
-#exec(open('pyTitiTechnology.py').read())
-from States.subjectSelectionState import SubjectSelectionState
+from States.startState import StartState
 from States.sessionState import SessionState
 from States.adminState import AdminState
 from States.shrinkingGoNoGoState import ShrinkingGoNoGoState
@@ -28,14 +27,13 @@ class App:
         print("transitioning to", state_name)
         
         inits = {
-            "subject" : SubjectSelectionState,
+            "start" : StartState,
             "admin" : AdminState,
             "session" : SessionState,
             "go_signal" : ShrinkingGoNoGoState
         }
         
         newState = inits[state_name]()
-
         
         if self.state:
             self.state.prepare_for_transition_to(newState)
@@ -58,7 +56,5 @@ class App:
             
             event.clearEvents()
         
-
-starting_state_name = "subject"
-app = App(starting_state_name)
+app = App("start")
 app.run()

@@ -11,6 +11,8 @@ class Session:
         
         self.start_time_stamp = core.getAbsTime()
         
+        self.start_time = core.getAbsTime()
+        
     def formatConstantsString(self):
         line = self.start_time_stamp + ','
         line += self.subject[0] + ','
@@ -27,3 +29,6 @@ class Session:
         
     def save(self):
         self.fileManager.write_constants(self.constants)
+        
+    def get_remaining_session_time(self):
+        return core.getTime() - self.start_time

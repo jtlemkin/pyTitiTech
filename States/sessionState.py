@@ -22,8 +22,26 @@ class SessionState(State):
         else:
             timeout_time = self.session.constants["sessionTimeoutTime"]
         
-        self.timeout_timer = core.CountdownTimer(timeout_time)
+        self.timeout_timer = core.Clock(timeout_time)
         
         self.session.save()
         print("Constants: " + self.session.formatConstantsString())
+        
+    def on_appear(self):
+        super().on_appear(self)
+        
+        self.session.trial.timeout_timer = None
+        #invalidate buttons
+        
+        core.wait(1)
+        
+        if session:
+            self.run_trial()
+            
+    def run_trial(self):
+        #If session ends before the trial would, don't create a trial
+        #Don't start the trial if running experiment?
+        
+        if self.session.constants.phase != "Experiment" and self.session.get_remaining_session_time() < 6.0:
+            pass
     

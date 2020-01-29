@@ -4,26 +4,29 @@ from button import Button
 from psychopy import visual, event, gui
 
 class AdminState(State):
+    subjectIDs = []
+    subjectData = None
+    
     def on_load(self):
         super().on_load()
         
-        self.editConfigsButton = Button(self.app.win, pos=(0, 0.5), size=(1, 0.5), text="Edit configs", on_click=self.configureSettings())
+        self.editConfigsButton = Button(self.app.win, pos=(0, 0.5), size=(1, 0.5), text="Edit configs", on_click=self.configureSettings)
         self.dataFileManagementButton = Button(self.app.win, pos=(-0.5,0), size=(1, 0.5), text="Data Management", on_click=print)
-        self.subjectDataButton = Button(self.app.win, pos=(0.5, 0), size=(1, 0.5), text="Subject Data", on_click=self.manageSubjects())
-        self.exitButton = Button(self.app.win, pos=(0, -0.5), size=(1, 0.5), text="Exit", fillColor=(1,0,0), on_click=self.app.transition_to("subject"))
+        self.subjectDataButton = Button(self.app.win, pos=(0.5, 0), size=(1, 0.5), text="Subject Data", on_click=self.manageSubjects)
+        self.exitButton = Button(self.app.win, pos=(0, -0.5), size=(1, 0.5), text="Exit", fillColor=(1,0,0), on_click=self.return_to_start)
         
         self.subviews = [self.editConfigsButton, self.dataFileManagementButton, self.subjectDataButton, self.exitButton]
         
-    def handle_input(self) -> None:
-        if self.editConfigsButton.clicked_by(self.app.mouse):
-            self.configureSettings()
-        elif self.exitButton.clicked_by(self.app.mouse):
-            self.app.transition_to("subject")
-        elif self.subjectDataButton.clicked_by(self.app.mouse):
-            subject = self.selectSubject()
-            self.updateSubject(self.selectSubject())
+        self.subjectData = self.app.fileManager.read_subject_data()
+        
+        for subject in self.subjectData:
+            #subjects are represented as lists with the first element equal to the id
+            self.subjectIDs.append(subject[0])
+            
+    def return_to_start(self):
+        self.app.transition_to("start")
     
-    def configureSettings(self):
+    def configureSettings(self):        
         constants = self.app.fileManager.read_constants()
         
         configGui = gui.DlgFromDict(constants, sortKeys = False)
@@ -31,11 +34,39 @@ class AdminState(State):
         if configGui.OK:
             self.app.fileManager.write_constants(constants)
             
-    def manageSubject(self):
+    def manageSubjects(self):
         subject = self.selectSubject()
-        self.updateSubject(self.selectSubject())    
+        self.updateSubject(subject)    
             
-    def selectSubject():
+    def selectSubject(self):
         subjects = {
-            "Subjects" : []
+            "Subjects" : self.subjectIDs
         }
+        
+        subjectSelectGui = gui.DlgFromDict(subjects, sortKeys = False)
+        
+        if subjectSelectGui.OK:
+            subject = self.findSubjectFor(subjects["Subjects"])
+            return subject
+            
+    def findSubjectFor(self, selectedID):
+        for subject in self.subjectData:
+            if subject[0] == selectedID:
+                return subject
+        
+        return None
+        
+    def updateSubject(self, subject):
+        subjectInfo = {
+            "ID" : subject[0],
+            "Status" : subject[1]
+        }
+        
+        updateSubjectDlg = gui.DlgFromDict(subjectInfo, sortKeys = False)
+        
+        if updateSubjectDlg.OK:
+            for i, subject in enumerate(self.subjectData):
+                if subject[0] == subjectInfo["ID"]:
+                    self.subjectData[i][1] = subjectInfo["Status"]
+                    
+            self.app.fileManager.write_subject_data(self.subjectData, overwrite = True)
