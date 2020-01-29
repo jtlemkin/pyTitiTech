@@ -1,6 +1,6 @@
 from state import State
 from button import Button
-from States.phaseSelectionState import PhaseSelectionState
+from States.sessionState import SessionState
 from session import Session
 
 from psychopy import event, gui
@@ -76,7 +76,7 @@ class SubjectSelectionState(State):
             self.session = Session(selectedSubject, goNoGoSettings["Phase"], self.app.fileManager)
             
             if self.settings_are_okay():
-               self.app.transition_to("phase")
+               self.app.transition_to("session")
             
     def settings_are_okay(self):
         sessionState = {
@@ -101,8 +101,5 @@ class SubjectSelectionState(State):
         return None
             
     def prepare_for_transition_to(self, newState) -> None:
-        if isinstance(newState, PhaseSelectionState):
-            if not self.selectedSubject:
-                self.selectedSubject = self.subjectData[0]
-                
-            newState.subject = self.selectedSubject
+        if isinstance(newState, SessionState):                
+            newState.session = self.session

@@ -10,9 +10,15 @@ class Session:
         self.start_time_stamp = datetime.now()
         
     def formatConstantsString(self):
-        line = ""
+        line = self.start_time_stamp + ','
+        line += self.subject[0] + ','
+        line += self.subject[1] + ','
+        line += self.phase + ',' #Should be a raw value
+        line += self.constants["goStimulusDuration"] + ','
+        line += self.constants["stopStiumulusDuration"] + ','
+        line += self.constants["negativeReinforcementDelay"] + ','
+        line += self.constants["postivieReinforcementDelay"] + ','
+        line += self.constants["holdPhaseDelay"] + ','
+        line += self.constants["sessionTimeoutTime"] + '\n'
         
-        for key in constants:
-            line += constants + ","
-            
-        return line[:-1]
+        return line

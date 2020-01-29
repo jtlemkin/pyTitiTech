@@ -2,7 +2,7 @@
 
 from psychopy import visual, event
 from States.subjectSelectionState import SubjectSelectionState
-from States.phaseSelectionState import PhaseSelectionState
+from States.sessionState import SessionState
 from States.adminState import AdminState
 from fileManager import FileManager
 
@@ -28,7 +28,7 @@ class App:
         inits = {
             "subject" : SubjectSelectionState,
             "admin" : AdminState,
-            "phase" : PhaseSelectionState
+            "session" : SessionState
         }
         
         newState = inits[state_name]()
