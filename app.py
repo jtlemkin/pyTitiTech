@@ -2,6 +2,7 @@ from States.startState import StartState
 from States.sessionState import SessionState
 from States.adminState import AdminState
 from States.shrinkingGoNoGoState import ShrinkingGoNoGoState
+from States.googleDriveState import GoogleDriveState
 
 from fileManager import FileManager
 
@@ -30,7 +31,8 @@ class App:
             "start" : StartState,
             "admin" : AdminState,
             "session" : SessionState,
-            "go_signal" : ShrinkingGoNoGoState
+            "go_signal" : ShrinkingGoNoGoState,
+            "google_drive" : GoogleDriveState,
         }
         
         newState = inits[state_name]()

@@ -11,7 +11,7 @@ class AdminState(State):
         super().on_load()
         
         self.editConfigsButton = Button(self.app.win, pos=(0, 0.5), size=(1, 0.5), text="Edit configs", on_click=self.configureSettings)
-        self.dataFileManagementButton = Button(self.app.win, pos=(-0.5,0), size=(1, 0.5), text="Data Management", on_click=print)
+        self.dataFileManagementButton = Button(self.app.win, pos=(-0.5,0), size=(1, 0.5), text="Data Management", on_click=self.transition_to_google_drive_state)
         self.subjectDataButton = Button(self.app.win, pos=(0.5, 0), size=(1, 0.5), text="Subject Data", on_click=self.manageSubjects)
         self.exitButton = Button(self.app.win, pos=(0, -0.5), size=(1, 0.5), text="Exit", fillColor=(1,0,0), on_click=self.return_to_start)
         
@@ -70,3 +70,6 @@ class AdminState(State):
                     self.subjectData[i][1] = subjectInfo["Status"]
                     
             self.app.fileManager.write_subject_data(self.subjectData, overwrite = True)
+            
+    def transition_to_google_drive_state(self):
+        self.app.transition_to("google_drive")
