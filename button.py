@@ -4,7 +4,10 @@ class Button:
     def __init__(self, win, pos, size, on_click, fillColor = (0,0,0), text=None) -> None:
         self.win = win
         self.rect = visual.Rect(win, pos = pos, size = size, fillColor = fillColor, units="norm")
-        self.text = visual.TextStim(self.win, text, pos=self.rect.pos, units="norm", height=self.rect.size[1] * 0.15)
+
+        text_pos = (pos[0] + 0.8, pos[1])
+
+        self.text = visual.TextStim(self.win, text, pos = text_pos, units="norm", height=self.rect.size[1] * 0.15)
         
         self.on_click = on_click
         

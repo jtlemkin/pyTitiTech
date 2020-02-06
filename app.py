@@ -15,7 +15,7 @@ class App:
     """
     
     state = None
-    win = visual.Window()
+    win = visual.Window(winType='pyglet')
     mouse = event.Mouse(win)
     
     fileManager = FileManager(subject_file = "Constants/subject-data.csv", 
