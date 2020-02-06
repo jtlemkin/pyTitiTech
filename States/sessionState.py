@@ -1,4 +1,4 @@
-from state import State
+from Framework.state import State
 
 import random
 
@@ -25,7 +25,7 @@ class SessionState(State):
         self.timeout_timer = core.Clock(timeout_time)
         
         self.session.save()
-        print("Constants: " + self.session.formatConstantsString())
+        print("Configuration: " + self.session.formatConstantsString())
         
     def on_appear(self):
         super().on_appear(self)

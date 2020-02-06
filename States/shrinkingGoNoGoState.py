@@ -1,4 +1,4 @@
-from state import State
+from Framework.state import State
 
 class ShrinkingGoNoGoState(State):
     pass

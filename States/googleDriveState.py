@@ -1,5 +1,5 @@
-from state import State
-from button import Button
+from Framework.state import State
+from Framework.button import Button
 
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.discovery import build
@@ -43,7 +43,7 @@ class GoogleDriveState(State):
 
     def upload_file(self):
         file_metadata = {'name': 'test.csv'}
-        media = MediaFileUpload('Constants/subject-data.csv', mimetype='text/csv')
+        media = MediaFileUpload('Configuration/subject-data.csv', mimetype='text/csv')
 
         drive_service = build('drive', 'v3', credentials=self.creds)
 

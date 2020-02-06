@@ -4,7 +4,7 @@ from States.adminState import AdminState
 from States.shrinkingGoNoGoState import ShrinkingGoNoGoState
 from States.googleDriveState import GoogleDriveState
 
-from fileManager import FileManager
+from Framework.fileManager import FileManager
 
 from psychopy import visual, event
 
@@ -18,8 +18,8 @@ class App:
     win = visual.Window(winType='pyglet')
     mouse = event.Mouse(win)
     
-    fileManager = FileManager(subject_file = "Constants/subject-data.csv", 
-                              constants_file = "Constants/user-defined-constants.csv")
+    fileManager = FileManager(subject_file = "Configuration/subject-data.csv",
+                              constants_file = "Configuration/user-defined-constants.csv")
 
     def __init__(self, state) -> None:
         self.transition_to(state)

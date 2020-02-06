@@ -4,3 +4,8 @@ __pycache__/
 __pycache__/startState.cpython-36.pyc
 __pycache__/pyTitiTechnology.cpython-36.pyc
 __pycache__/startState.cpython-36.pyc
+.idea/
+*.json
+*.yml
+.DS_Store
+__py_cache/*
