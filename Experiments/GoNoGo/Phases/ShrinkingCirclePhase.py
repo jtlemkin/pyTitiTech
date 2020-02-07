@@ -11,7 +11,7 @@ class GoSignal:
 
         self.incr = [self.max_size[0] / 20, self.max_size[1] / 20]
 
-        self.stim = visual.ImageStim(win, image='../Assets/goSignal.png', units='norm', size=self.max_size)
+        self.stim = visual.ImageStim(win, image='../Assets/Images/goSignal.png', units='norm', size=self.max_size)
 
     def draw(self):
         self.stim.draw()
@@ -77,8 +77,8 @@ mouse = event.Mouse(win=win)
 
 go_signal = GoSignal(win)
 
-good_click = sound.Sound('../Assets/negativeReinforcement.wav')
-bad_click = sound.Sound('../Assets/negativeReinforcement.wav')
+good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
+bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 
 click_handler = ClickHandler(go_signal, good_click, bad_click)
 
