@@ -3,12 +3,12 @@ import psychtoolbox as ptb
 from random import randrange
 
 
-class GoSignal:
-    def __init__(self, _win):
+class Signal:
+    def __init__(self, _win, image):
         length_in_pixels = min(_win.size[0] / 2, _win.size[1])
         size = [length_in_pixels / _win.size[0], length_in_pixels / _win.size[1]]
 
-        self.stim = visual.ImageStim(_win, image='../Assets/Images/goSignal.png', units='norm', size=size)
+        self.stim = visual.ImageStim(_win, image=image, units='norm', size=size)
 
     def move_left(self):
         self.stim.pos = [0.5, 0]
@@ -25,29 +25,34 @@ class GoSignal:
 win = visual.Window(fullscr=False, color="Black")
 mouse = event.Mouse(win=win)
 
-go_signal = GoSignal(win)
+go_signal = Signal(win, image='../Assets/Images/goSignal.png')
+no_go_signal = Signal(win, image='../Assets/Images/stopStimulus.png')
+
 trial_sound = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 
-num_consecutive = 0
-was_last_signal_on_right = -1
 
-timer = core.CountdownTimer()
-
-
-def draw_signal(_is_signal_on_right):
+def draw(_signal, _is_signal_on_right):
     if is_signal_on_right:
-        go_signal.move_right()
+        signal.move_right()
     else:
-        go_signal.move_left()
+        signal.move_left()
 
     _now = ptb.GetSecs()
     trial_sound.play(when=_now + 0.1)
 
     core.wait(0.1 + 0.5)
 
-    go_signal.draw()
+    signal.draw()
+
+
+num_consecutive_pos = 0
+was_last_signal_on_right = False
+
+is_go_signal = False
+
+timer = core.CountdownTimer()
 
 
 for _ in range(0, 20):
@@ -55,17 +60,24 @@ for _ in range(0, 20):
     is_signal_on_right = rand == 1
 
     if is_signal_on_right == was_last_signal_on_right:
-        if num_consecutive == 4:
+        if num_consecutive_pos == 4:
             is_signal_on_right = not is_signal_on_right
-            num_consecutive = 0
+            num_consecutive_pos = 0
         else:
-            num_consecutive += 1
+            num_consecutive_pos += 1
     else:
-        num_consecutive = 0
+        num_consecutive_pos = 0
 
     was_last_signal_on_right = is_signal_on_right
 
-    draw_signal(is_signal_on_right)
+    is_go_signal = not is_go_signal
+
+    if is_go_signal:
+        signal = go_signal
+    else:
+        signal = no_go_signal
+
+    draw(signal, is_signal_on_right)
 
     #How long is stim on screen?
     timer.reset(4.0)
@@ -74,7 +86,7 @@ for _ in range(0, 20):
         if mouse.getPressed()[0]:
             win.flip()
 
-            if mouse.isPressedIn(go_signal.stim):
+            if mouse.isPressedIn(signal.stim) and is_go_signal:
                 now = ptb.GetSecs()
                 good_click.play(when=now + 0.1)
 
