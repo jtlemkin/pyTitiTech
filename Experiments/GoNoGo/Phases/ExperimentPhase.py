@@ -3,9 +3,6 @@ import psychtoolbox as ptb
 from random import randrange, shuffle
 from collections import deque
 
-#More than 4 in a row
-
-
 class Signal:
     def __init__(self, _win, image):
         length_in_pixels = min(_win.size[0] / 2, _win.size[1])
@@ -31,7 +28,7 @@ mouse = event.Mouse(win=win)
 go_signal = Signal(win, image='../Assets/Images/goSignal.png')
 no_go_signal = Signal(win, image='../Assets/Images/stopStimulus.png')
 
-trial_sound = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
+trial_sound = sound.Sound('../Assets/Sounds/trialStartSound.wav')
 good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
 
@@ -57,7 +54,7 @@ is_go_signal = False
 
 timer = core.CountdownTimer()
 
-phases = [0 for _ in range(0, 10)] + [1 for _ in range(0, 10)]
+phases = [0 for _ in range(0, 48)] + [1 for _ in range(0, 12)]
 shuffle(phases)
 phases = deque(phases)
 
