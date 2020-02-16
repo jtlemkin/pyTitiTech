@@ -1,12 +1,12 @@
-from Framework.state import State
+from Framework.psyviewcontroller import PsyViewController
 from Framework.button import Button
 
-from States.sessionState import SessionState
+from States.sessionState import SessionPsyViewController
 from session import Session
 
 from psychopy import gui
 
-class StartState(State):
+class StartPsyViewController(PsyViewController):
     subjectIDs = []
     subjectData = None
     session = None
@@ -106,5 +106,5 @@ class StartState(State):
         return None
             
     def prepare_for_transition_to(self, newState) -> None:
-        if isinstance(newState, SessionState):  
+        if isinstance(newState, SessionPsyViewController):
             newState.session = self.session

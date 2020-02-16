@@ -1,10 +1,10 @@
-from Framework.state import State
+from Framework.psyviewcontroller import PsyViewController
 
 import random
 
 from psychopy import core
 
-class SessionState(State):
+class SessionPsyViewController(PsyViewController):
     session = None
     
     experiment_trial_type = []

@@ -1,8 +1,8 @@
-from States.startState import StartState
-from States.sessionState import SessionState
-from States.adminState import AdminState
-from States.shrinkingGoNoGoState import ShrinkingGoNoGoState
-from States.googleDriveState import GoogleDriveState
+from States.deprecatedStartState import StartPsyViewController
+from States.sessionState import SessionPsyViewController
+from States.adminState import AdminPsyViewController
+from States.shrinkingGoNoGoState import ShrinkingGoNoGoPsyViewController
+from States.googleDriveState import GoogleDrivePsyViewController
 
 from Framework.fileManager import FileManager
 
@@ -28,11 +28,11 @@ class App:
         print("transitioning to", state_name)
         
         inits = {
-            "start" : StartState,
-            "admin" : AdminState,
-            "session" : SessionState,
-            "go_signal" : ShrinkingGoNoGoState,
-            "google_drive" : GoogleDriveState,
+            "start" : StartPsyViewController,
+            "admin" : AdminPsyViewController,
+            "session" : SessionPsyViewController,
+            "go_signal" : ShrinkingGoNoGoPsyViewController,
+            "google_drive" : GoogleDrivePsyViewController,
         }
         
         newState = inits[state_name]()

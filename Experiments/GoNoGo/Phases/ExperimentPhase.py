@@ -3,6 +3,7 @@ import psychtoolbox as ptb
 from random import randrange, shuffle
 from collections import deque
 
+
 class Signal:
     def __init__(self, _win, image):
         length_in_pixels = min(_win.size[0] / 2, _win.size[1])
@@ -81,7 +82,7 @@ while phases:
 
     draw(signal, is_signal_on_right)
 
-    #How long is stim on screen?
+    # How long is stim on screen?
     timer.reset(4.0)
 
     while timer.getTime() > 0:

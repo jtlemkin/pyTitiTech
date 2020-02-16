@@ -1,4 +1,4 @@
-from Framework.state import State
+from Framework.psyviewcontroller import PsyViewController
 from Framework.button import Button
 
 from googleapiclient.http import MediaFileUpload
@@ -9,7 +9,7 @@ from google.auth.transport.requests import Request
 import pickle
 import os.path
 
-class GoogleDriveState(State):
+class GoogleDrivePsyViewController(PsyViewController):
     creds = None
     SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 

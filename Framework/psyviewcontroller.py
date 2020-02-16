@@ -1,24 +1,34 @@
 from psychopy import visual
-
 from Framework.button import Button
 
-class State():
+
+class PsyViewController:
     app = None
     background = None
-    subviews = []
-        
+    subviews = set()
+
     def draw(self):
         self.background.draw()
         
         for view in self.subviews:
             view.draw()
+
+    def add_subview(self, view):
+        self.subviews.add(view)
+
+    def add_button(self, pos, size, text, func):
+        button = Button(self.app.win, pos=pos, size=size, text=text, on_click=func)
+
+        self.add_subview(button)
         
-    #This function handles click events    
+    # This function handles click events
     def handle_input(self):
         for view in self.subviews:
             if isinstance(view, Button) and view.clicked_by(self.app.mouse):
                 view.on_click()
-        
+
+    # MARK: Lifecycle Methods
+
     def prepare_for_transition_to(self, newState):
         pass
         

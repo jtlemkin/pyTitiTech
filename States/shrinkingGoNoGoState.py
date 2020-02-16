@@ -1,4 +1,4 @@
-from Framework.state import State
+from Framework.psyviewcontroller import PsyViewController
 
-class ShrinkingGoNoGoState(State):
+class ShrinkingGoNoGoPsyViewController(PsyViewController):
     pass

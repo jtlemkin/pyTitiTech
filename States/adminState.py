@@ -1,9 +1,9 @@
-from Framework.state import State
+from Framework.psyviewcontroller import PsyViewController
 from Framework.button import Button
 
 from psychopy import gui
 
-class AdminState(State):
+class AdminPsyViewController(PsyViewController):
     subjectIDs = []
     subjectData = None
     
