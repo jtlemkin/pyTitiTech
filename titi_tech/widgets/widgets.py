@@ -5,7 +5,7 @@ import titi_tech.colors as colors
 
 class Label(glooey.Label):
     custom_font_name = 'Lato Regular'
-    custom_font_size = 10
+    custom_font_size = 14
     custom_color = '#ffffff'
     custom_alignment = 'center'
     custom_left_padding = 10
@@ -85,6 +85,12 @@ class Header(glooey.Background):
     custom_alignment = 'fill top'
     custom_color = '#3A98FE'
     custom_height_hint = 50
+
+    def __init__(self, title='', **kwargs):
+        super().__init__(**kwargs)
+
+        self.title = Label(title)
+        self._attach_child(self.title)
 
 
 class Title(glooey.Label):
