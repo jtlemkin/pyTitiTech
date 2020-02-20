@@ -23,11 +23,12 @@ class App:
         print(f"Transitioning to {page_name}")
 
         pages = {
-            "login" : LoginPage
+            "login" : LoginPage,
+            "subject_selection" : LoginPage
         }
 
         if self.page:
             self.gui.remove(self.page)
 
-        self.page = pages[page_name](self.window_size)
+        self.page = pages[page_name](self, self.window_size)
         self.gui.add(self.page)
