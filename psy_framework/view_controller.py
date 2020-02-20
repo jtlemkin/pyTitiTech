@@ -1,25 +1,31 @@
-from psychopy import visual
-from Framework.button import Button
+from psychopy.visual import Window
+from psy_framework.button import Button
+from psy_framework.text_input import TextInput
 
 
-class PsyViewController:
+class ViewController:
     app = None
-    background = None
     subviews = set()
 
     def draw(self):
-        self.background.draw()
-        
         for view in self.subviews:
             view.draw()
 
     def add_subview(self, view):
         self.subviews.add(view)
 
-    def add_button(self, pos, size, text, func):
+    def add_button(self, pos, size="reg", text="Button", func=print):
+        if size == "reg":
+            size = [1, 0.5]
+
         button = Button(self.app.win, pos=pos, size=size, text=text, on_click=func)
 
         self.add_subview(button)
+
+    def add_text_input(self, pos, width):
+        text_input = TextInput(self.app.win, pos=pos, width=width)
+
+        self.add_subview(text_input)
         
     # This function handles click events
     def handle_input(self):
@@ -29,12 +35,11 @@ class PsyViewController:
 
     # MARK: Lifecycle Methods
 
-    def prepare_for_transition_to(self, newState):
+    def prepare_for_transition_to(self, new_state):
         pass
         
-    def on_load(self):        
-        self.background = visual.Rect(self.app.win, size=(4,4), units='norm')
-        self.background.color = (0, 0, 1)
+    def on_load(self):
+        pass
         
     def on_appear(self):
         pass

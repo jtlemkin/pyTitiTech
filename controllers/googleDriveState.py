@@ -1,5 +1,5 @@
-from Framework.psyviewcontroller import PsyViewController
-from Framework.button import Button
+from psy_framework.view_controller import ViewController
+from psy_framework.button import Button
 
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.discovery import build
@@ -9,7 +9,7 @@ from google.auth.transport.requests import Request
 import pickle
 import os.path
 
-class GoogleDrivePsyViewController(PsyViewController):
+class GoogleDriveViewController(ViewController):
     creds = None
     SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 
@@ -43,7 +43,7 @@ class GoogleDrivePsyViewController(PsyViewController):
 
     def upload_file(self):
         file_metadata = {'name': 'test.csv'}
-        media = MediaFileUpload('Configuration/subject-data.csv', mimetype='text/csv')
+        media = MediaFileUpload('config/subject-data.csv', mimetype='text/csv')
 
         drive_service = build('drive', 'v3', credentials=self.creds)
 

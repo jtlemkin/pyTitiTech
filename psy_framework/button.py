@@ -1,13 +1,13 @@
-from psychopy import visual, event
+from psychopy.visual import Rect, TextStim
+
 
 class Button:    
     def __init__(self, win, pos, size, on_click, fillColor = (0,0,0), text=None) -> None:
-        self.win = win
-        self.rect = visual.Rect(win, pos = pos, size = size, fillColor = fillColor, units="norm")
+        self.rect = Rect(win, pos=pos, size=size, fillColor=fillColor, units="norm")
 
         text_pos = (pos[0] + 0.8, pos[1])
 
-        self.text = visual.TextStim(self.win, text, pos = text_pos, units="norm", height=self.rect.size[1] * 0.15)
+        self.text = TextStim(win, text, pos=text_pos, units="norm", height=self.rect.size[1] * 0.15)
         
         self.on_click = on_click
         

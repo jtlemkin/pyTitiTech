@@ -1,9 +1,9 @@
-from Framework.psyviewcontroller import PsyViewController
-from Framework.button import Button
+from psy_framework.view_controller import ViewController
+from psy_framework.button import Button
 
 from psychopy import gui
 
-class AdminPsyViewController(PsyViewController):
+class AdminViewController(ViewController):
     subjectIDs = []
     subjectData = None
     

@@ -1,12 +1,9 @@
-from States.deprecatedStartState import StartPsyViewController
-from States.sessionState import SessionPsyViewController
-from States.adminState import AdminPsyViewController
-from States.shrinkingGoNoGoState import ShrinkingGoNoGoPsyViewController
-from States.googleDriveState import GoogleDrivePsyViewController
+from controllers.login_vc import LoginViewController
 
-from Framework.fileManager import FileManager
+from psy_framework.fileManager import FileManager
 
 from psychopy import visual, event
+
 
 class App:
     """
@@ -18,8 +15,8 @@ class App:
     win = visual.Window(winType='pyglet')
     mouse = event.Mouse(win)
     
-    fileManager = FileManager(subject_file = "Configuration/subject-data.csv",
-                              constants_file = "Configuration/user-defined-constants.csv")
+    fileManager = FileManager(subject_file="config/subject-data.csv",
+                              constants_file="config/user-defined-constants.csv")
 
     def __init__(self, state) -> None:
         self.transition_to(state)
@@ -28,19 +25,15 @@ class App:
         print("transitioning to", state_name)
         
         inits = {
-            "start" : StartPsyViewController,
-            "admin" : AdminPsyViewController,
-            "session" : SessionPsyViewController,
-            "go_signal" : ShrinkingGoNoGoPsyViewController,
-            "google_drive" : GoogleDrivePsyViewController,
+            "login" : LoginViewController
         }
         
-        newState = inits[state_name]()
+        new_state = inits[state_name]()
         
         if self.state:
-            self.state.prepare_for_transition_to(newState)
+            self.state.prepare_for_transition_to(new_state)
             
-        self.state = newState
+        self.state = new_state
         self.state.app = self
         
         self.state.on_load()
@@ -57,6 +50,7 @@ class App:
                 break
             
             event.clearEvents()
-        
-app = App("start")
+
+
+app = App("login")
 app.run()

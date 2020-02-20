@@ -1,10 +1,10 @@
-from Framework.psyviewcontroller import PsyViewController
+from psy_framework.view_controller import ViewController
 
 import random
 
 from psychopy import core
 
-class SessionPsyViewController(PsyViewController):
+class SessionViewController(ViewController):
     session = None
     
     experiment_trial_type = []
@@ -25,7 +25,7 @@ class SessionPsyViewController(PsyViewController):
         self.timeout_timer = core.Clock(timeout_time)
         
         self.session.save()
-        print("Configuration: " + self.session.formatConstantsString())
+        print("config: " + self.session.formatConstantsString())
         
     def on_appear(self):
         super().on_appear(self)

@@ -1,0 +1,8 @@
+primary = '#3A98FE'
+primary_lightest = '#e4f2ff'
+primary_hover = '#4fa7ff'
+primary_down = '#388aef'
+background = '#ffffff'
+complementary = '#fe9f3a'
+complementary_hover = '#ffac48'
+complementary_down = '#f99437'
