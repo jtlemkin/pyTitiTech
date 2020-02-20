@@ -1,6 +1,6 @@
 import pyglet
 import glooey
-import app.colors as colors
+import titi_tech.colors as colors
 
 
 class Label(glooey.Label):
@@ -37,6 +37,7 @@ class TextForm(glooey.Form):
         custom_right_padding = custom_font_size * 1
         custom_top_padding = custom_font_size * 0.5
         custom_bottom_padding = custom_font_size * 0.5
+        custom_selection_background_color = colors.complementary
 
     class Base(glooey.Background):
         custom_color = colors.primary_lightest

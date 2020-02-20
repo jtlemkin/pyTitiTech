@@ -1,5 +1,5 @@
 import glooey
-import app.widgets as widgets
+import titi_tech.widgets as widgets
 
 
 class ProjectTitle(glooey.Widget):
@@ -40,25 +40,6 @@ class LoginSubmitForm(glooey.Widget):
 
 
 class LoginPage(glooey.Widget):
-    custom_alignment = 'center'
-
-    def __init__(self, window_size):
-        super().__init__()
-
-        vbox = glooey.VBox()
-        self.title = ProjectTitle()
-        self.login_submit_form = LoginSubmitForm()
-        self.guest_button = widgets.AltButton("Guest")
-
-        vbox.pack(self.title)
-        vbox.add(self.login_submit_form)
-        vbox.add(self.guest_button)
-        vbox.set_padding(all=window_size[1] / 20)
-
-        self._attach_child(vbox)
-
-
-class AltLoginPage(glooey.Widget):
     custom_alignment = 'center'
 
     def __init__(self, window_size):
