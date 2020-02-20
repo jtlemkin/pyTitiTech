@@ -23,8 +23,8 @@ class App:
         print(f"Transitioning to {page_name}")
 
         pages = {
-            "login" : LoginPage,
-            "subject_selection" : LoginPage
+            "login": LoginPage,
+            "subject_selection": LoginPage
         }
 
         if self.page:

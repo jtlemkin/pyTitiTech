@@ -44,7 +44,7 @@ class LoginPage(glooey.Widget):
 
     def configure_buttons(self):
         self.guest_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
-        self.login_submit_form.login_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
+        self.login_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
 
     def __init__(self, app, window_size):
         super().__init__()
@@ -53,8 +53,12 @@ class LoginPage(glooey.Widget):
 
         vbox = glooey.VBox()
         self.title = ProjectTitle()
+
         self.login_submit_form = LoginSubmitForm()
+
         self.guest_button = widgets.AltButton("Guest")
+        self.login_button = self.login_submit_form.login_button
+        self.text_form = self.login_submit_form.login_text_form
 
         self.configure_buttons()
 

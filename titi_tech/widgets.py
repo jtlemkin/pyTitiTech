@@ -38,6 +38,7 @@ class TextForm(glooey.Form):
         custom_top_padding = custom_font_size * 0.5
         custom_bottom_padding = custom_font_size * 0.5
         custom_selection_background_color = colors.complementary
+        custom_unfocus_on_enter = True
 
     class Base(glooey.Background):
         custom_color = colors.primary_lightest
