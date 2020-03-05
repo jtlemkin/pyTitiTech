@@ -1,8 +1,8 @@
 import glooey
 import pyglet
 
-import titi_tech.widgets as widgets
-from titi_tech.page import Page
+import widgets as widgets
+from page import Page
 
 
 class TitiImage(glooey.Background):

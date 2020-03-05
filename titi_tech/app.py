@@ -1,9 +1,8 @@
+import colors as colors
 import glooey
 import pyglet
-
-import titi_tech.colors as colors
-import titi_tech.widgets as widgets
-from titi_tech.login_page import LoginPage
+import widgets as widgets
+from login_page import LoginPage
 
 
 class App:

@@ -1,6 +1,5 @@
+import colors as colors
 import glooey
-
-import titi_tech.colors as colors
 
 
 class Label(glooey.Label):
