@@ -12,7 +12,6 @@ class Label(glooey.Label):
 
 
 class TextForm(glooey.Form):
-
     custom_alignment = 'fill'
 
     has_been_clicked = False
@@ -31,7 +30,7 @@ class TextForm(glooey.Form):
         custom_font_name = 'Lato Regular'
         custom_font_size = 16
         custom_color = '#000000'
-        custom_width_hint = 200
+        custom_width_hint = 400
         custom_left_padding = custom_font_size * 1
         custom_right_padding = custom_font_size * 1
         custom_top_padding = custom_font_size * 0.5
@@ -80,16 +79,24 @@ class AltButton(glooey.Button):
         custom_color = colors.complementary_hover
 
 
-class Header(glooey.Background):
+class Header(glooey.Frame):
     custom_alignment = 'fill top'
-    custom_color = '#3A98FE'
-    custom_height_hint = 50
+    custom_height_hint = 60
+
+    Box = glooey.Grid
+
+    class Decoration(glooey.Background):
+        custom_color = colors.primary
+        pass
 
     def __init__(self, title='', **kwargs):
         super().__init__(**kwargs)
 
-        self.title = Label(title)
-        self._attach_child(self.title)
+        self.add(col=1, widget=Label(title))
+        self.add(col=2, widget=glooey.Background())
+
+    def add(self, widget, col, row=0):
+        self.box.add(row, col, widget)
 
 
 class Title(glooey.Label):

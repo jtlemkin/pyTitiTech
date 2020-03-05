@@ -7,8 +7,8 @@ from page import Page
 
 class TitiImage(glooey.Background):
     titi_image = pyglet.resource.image('TitiMonkeys.png')
-    titi_image.height = 125
-    titi_image.width = 125
+    titi_image.height = 200
+    titi_image.width = titi_image.height
 
     custom_image = titi_image
 
@@ -17,15 +17,16 @@ class ProjectTitle(glooey.Widget):
     custom_alignment = 'center'
     custom_left_padding = 10
     custom_right_padding = 10
+    custom_bottom_padding = 50
 
     def __init__(self):
         super().__init__()
 
         hbox = glooey.HBox()
-        self.title = widgets.Title("Admin Login")
+        #self.title = widgets.Title("Admin Login")
         self.image = TitiImage()
 
-        hbox.pack(self.title)
+        #hbox.pack(self.title)
         hbox.add(self.image)
         hbox.set_padding(20)
 
@@ -39,9 +40,9 @@ class LoginSubmitForm(glooey.Widget):
         super().__init__()
 
         hbox = glooey.HBox()
-        self.login_text_form = widgets.TextForm("Password")
+        self.login_text_form = widgets.TextForm("Enter Password")
 
-        self.login_button = widgets.DefaultButton("Login")
+        self.login_button = widgets.DefaultButton("Admin Login")
 
         hbox.pack(self.login_text_form)
         hbox.padding = 6
@@ -63,7 +64,7 @@ class LoginPageWidget(glooey.Widget):
 
         self.login_submit_form = LoginSubmitForm()
 
-        self.guest_button = widgets.AltButton("Login as Guest")
+        self.guest_button = widgets.AltButton("Guest Login")
         self.login_button = self.login_submit_form.login_button
         self.text_form = self.login_submit_form.login_text_form
 
@@ -76,6 +77,8 @@ class LoginPageWidget(glooey.Widget):
 
 
 class LoginPage(Page):
+    title = "Bales Lab"
+
     def __init__(self, app):
         self.main_widget = LoginPageWidget(app.window_size)
         self.guest_button = self.main_widget.guest_button

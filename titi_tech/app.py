@@ -7,7 +7,7 @@ from subject_selection_page import SSPage
 
 
 class App:
-    window = pyglet.window.Window(fullscreen=True)
+    window = pyglet.window.Window(fullscreen=False, height=780, width=1200)
     window_size = window.get_size()
 
     gui = glooey.Gui(window)
@@ -21,8 +21,6 @@ class App:
 
     def __init__(self, page_name):
         self.gui.add(glooey.Background(color=colors.background))
-        #self.gui.add(self.header)
-
         self.transition_to(page_name)
 
     def transition_to(self, page_name):
@@ -32,10 +30,10 @@ class App:
             self.gui.remove(self.page.main_widget)
 
         self.page = self.pages[page_name](self)
-        self.gui.add(self.page.main_widget)
+        self.header = widgets.Header(self.page.title)
 
-        #self.update_header()
+        vbox = glooey.VBox()
+        vbox.pack(self.header)
+        vbox.add(self.page.main_widget)
 
-    def update_header(self):
-        if self.page.title:
-            self.header.title.set_text(self.page.title)
+        self.gui.add(vbox)
