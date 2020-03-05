@@ -2,7 +2,6 @@ import colors
 import glooey
 import pyglet
 import widgets
-from add_subject_page import ASPage
 from login_page import LoginPage
 from select_subject_page import SSPage
 
@@ -19,8 +18,7 @@ class App:
 
     pages = {
         "login": LoginPage,
-        "select_subject": SSPage,
-        "add_subject" : ASPage
+        "select_subject": SSPage
     }
 
     def __init__(self, page_name):
