@@ -87,5 +87,5 @@ class LoginPage(Page):
         super().__init__(app)
 
     def configure_buttons(self):
-        self.guest_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
-        self.login_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
+        self.guest_button.push_handlers(on_click=lambda x: self.app.transition_to('select_subject'))
+        self.login_button.push_handlers(on_click=lambda x: self.app.transition_to('select_subject'))
