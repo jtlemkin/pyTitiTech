@@ -3,10 +3,11 @@ import glooey
 import pyglet
 import widgets as widgets
 from login_page import LoginPage
+from subject_selection_page import SSPage
 
 
 class App:
-    window = pyglet.window.Window()
+    window = pyglet.window.Window(fullscreen=True)
     window_size = window.get_size()
 
     gui = glooey.Gui(window)
@@ -15,7 +16,7 @@ class App:
 
     pages = {
         "login": LoginPage,
-        "subject_selection": LoginPage
+        "subject_selection": SSPage
     }
 
     def __init__(self, page_name):
@@ -33,7 +34,7 @@ class App:
         self.page = self.pages[page_name](self)
         self.gui.add(self.page.main_widget)
 
-        self.update_header()
+        #self.update_header()
 
     def update_header(self):
         if self.page.title:
