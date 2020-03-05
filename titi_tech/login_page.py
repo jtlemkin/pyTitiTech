@@ -1,7 +1,7 @@
 import glooey
 import pyglet
 
-import widgets as widgets
+import widgets
 from page import Page
 
 
