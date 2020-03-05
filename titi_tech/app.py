@@ -10,6 +10,8 @@ class App:
     window = pyglet.window.Window(fullscreen=False, height=780, width=1200)
     window_size = window.get_size()
 
+    layout = glooey.VBox()
+
     gui = glooey.Gui(window)
     header = widgets.Header()
     page = None
@@ -27,13 +29,13 @@ class App:
         print(f"Transitioning to {page_name}")
 
         if self.page:
-            self.gui.remove(self.page.main_widget)
+            self.gui.remove(self.layout)
 
         self.page = self.pages[page_name](self)
         self.header = widgets.Header(self.page.title)
 
-        vbox = glooey.VBox()
-        vbox.pack(self.header)
-        vbox.add(self.page.main_widget)
+        self.layout = glooey.VBox()
+        self.layout.pack(self.header)
+        self.layout.add(self.page.main_widget)
 
-        self.gui.add(vbox)
+        self.gui.add(self.layout)
