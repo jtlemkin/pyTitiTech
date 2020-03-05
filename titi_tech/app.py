@@ -1,7 +1,7 @@
-import colors as colors
+import colors
 import glooey
 import pyglet
-import widgets as widgets
+import widgets
 from login_page import LoginPage
 from subject_selection_page import SSPage
 
