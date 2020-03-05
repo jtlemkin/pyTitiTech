@@ -1,5 +1,16 @@
 import glooey
-import titi_tech.widgets.widgets as widgets
+import pyglet
+
+import titi_tech.widgets as widgets
+from titi_tech.page import Page
+
+
+class TitiImage(glooey.Background):
+    titi_image = pyglet.resource.image('TitiMonkeys.png')
+    titi_image.height = 125
+    titi_image.width = 125
+
+    custom_image = titi_image
 
 
 class ProjectTitle(glooey.Widget):
@@ -11,8 +22,8 @@ class ProjectTitle(glooey.Widget):
         super().__init__()
 
         hbox = glooey.HBox()
-        self.title = widgets.Title("TitiTech")
-        self.image = widgets.TitiImage()
+        self.title = widgets.Title("Admin Login")
+        self.image = TitiImage()
 
         hbox.pack(self.title)
         hbox.add(self.image)
@@ -52,7 +63,7 @@ class LoginPageWidget(glooey.Widget):
 
         self.login_submit_form = LoginSubmitForm()
 
-        self.guest_button = widgets.AltButton("Guest")
+        self.guest_button = widgets.AltButton("Login as Guest")
         self.login_button = self.login_submit_form.login_button
         self.text_form = self.login_submit_form.login_text_form
 
@@ -62,3 +73,16 @@ class LoginPageWidget(glooey.Widget):
         vbox.set_padding(all=window_size[1] / 20)
 
         self._attach_child(vbox)
+
+
+class LoginPage(Page):
+    def __init__(self, app):
+        self.main_widget = LoginPageWidget(app.window_size)
+        self.guest_button = self.main_widget.guest_button
+        self.login_button = self.main_widget.login_button
+
+        super().__init__(app)
+
+    def configure_buttons(self):
+        self.guest_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))
+        self.login_button.push_handlers(on_click=lambda x: self.app.transition_to('subject_selection'))

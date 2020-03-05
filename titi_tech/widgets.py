@@ -1,5 +1,5 @@
-import pyglet
 import glooey
+
 import titi_tech.colors as colors
 
 
@@ -95,14 +95,6 @@ class Header(glooey.Background):
 
 class Title(glooey.Label):
     custom_font_name = 'futura'
-    custom_font_size = 40
+    custom_font_size = 26
     custom_color = '#000000'
     custom_alignment = 'center'
-
-
-class TitiImage(glooey.Background):
-    titi_image = pyglet.resource.image('TitiMonkeys.png')
-    titi_image.height = 125
-    titi_image.width = 125
-
-    custom_image = titi_image

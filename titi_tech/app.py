@@ -1,9 +1,9 @@
-import pyglet
 import glooey
+import pyglet
 
-from titi_tech.pages.login_page import LoginPage
-import titi_tech.widgets.widgets as widgets
 import titi_tech.colors as colors
+import titi_tech.widgets as widgets
+from titi_tech.login_page import LoginPage
 
 
 class App:
@@ -21,7 +21,7 @@ class App:
 
     def __init__(self, page_name):
         self.gui.add(glooey.Background(color=colors.background))
-        self.gui.add(self.header)
+        #self.gui.add(self.header)
 
         self.transition_to(page_name)
 
