@@ -1,6 +1,7 @@
-from psychopy import visual, core, event, sound
-import psychtoolbox as ptb
 from random import randrange
+
+import psychtoolbox as ptb
+from psychopy import visual, core, event, sound
 
 
 class GoSignal:
@@ -26,9 +27,9 @@ win = visual.Window(fullscr=False, color="Black")
 mouse = event.Mouse(win=win)
 
 go_signal = GoSignal(win)
-trial_sound = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
-good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
-bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
+trial_sound = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
+good_click = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
+bad_click = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
 
 num_consecutive = 0
 was_last_signal_on_right = False

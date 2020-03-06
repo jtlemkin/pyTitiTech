@@ -1,5 +1,5 @@
-from psychopy import visual, core, event, sound
 import psychtoolbox as ptb
+from psychopy import visual, core, event, sound
 
 
 class GoSignal:
@@ -11,7 +11,7 @@ class GoSignal:
 
         self.incr = [self.max_size[0] / 20, self.max_size[1] / 20]
 
-        self.stim = visual.ImageStim(win, image='../Assets/Images/goSignal.png', units='norm', size=self.max_size)
+        self.stim = visual.ImageStim(win, image='../assets/images/goSignal.png', units='norm', size=self.max_size)
 
     def draw(self):
         self.stim.draw()
@@ -52,48 +52,48 @@ class ClickHandler:
         self.num_good += 1
 
         if self.num_good == 3:
-            go_signal.shrink()
+            self.go_signal.shrink()
 
             self.num_good = 0
 
         now = ptb.GetSecs()
-        good_click.play(when=now+0.5)
+        self.good_click_sound.play(when=now+0.5)
 
     def on_bad_click(self):
         self.num_good = 0
         self.num_bad += 1
 
         if self.num_bad == 3:
-            go_signal.grow()
+            self.go_signal.grow()
 
             self.num_bad = 0
 
         now = ptb.GetSecs()
-        bad_click.play(when=now + 0.5)
+        self.bad_click_sound.play(when=now + 0.5)
 
 
-win = visual.Window(fullscr=False, color="Black")
-mouse = event.Mouse(win=win)
+def run_shrinking_circle_phase():
+    win = visual.Window(fullscr=False, color="Black")
+    mouse = event.Mouse(win=win)
 
-go_signal = GoSignal(win)
+    go_signal = GoSignal(win)
 
-good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
-bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
+    good_click = sound.Sound('../assets/sounds/negativeReinforcement.wav')
+    bad_click = sound.Sound('../assets/sounds/negativeReinforcement.wav')
 
-click_handler = ClickHandler(go_signal, good_click, bad_click)
+    click_handler = ClickHandler(go_signal, good_click, bad_click)
 
+    while not go_signal.is_min_size():
+        go_signal.draw()
+        win.flip()
 
-while not go_signal.is_min_size():
-    go_signal.draw()
-    win.flip()
+        if mouse.getPressed()[0]:
+            if mouse.isPressedIn(go_signal.stim):
+                click_handler.on_good_click()
+            else:
+                click_handler.on_bad_click()
 
-    if mouse.getPressed()[0]:
-        if mouse.isPressedIn(go_signal.stim):
-            click_handler.on_good_click()
-        else:
-            click_handler.on_bad_click()
+            core.wait(0.2)
 
-        core.wait(0.2)
-
-    event.clearEvents()
+        event.clearEvents()
 

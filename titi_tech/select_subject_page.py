@@ -1,5 +1,6 @@
 import glooey
 import widgets
+from ShrinkingCirclePhase import run_shrinking_circle_phase
 from page import Page
 
 
@@ -77,4 +78,4 @@ class SSPage(Page):
         super().__init__(app)
 
     def configure_buttons(self):
-        pass
+        self.main_widget.start_button.push_handlers(on_click=lambda x: run_shrinking_circle_phase())

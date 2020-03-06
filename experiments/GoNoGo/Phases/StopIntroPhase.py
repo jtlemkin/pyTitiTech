@@ -1,6 +1,7 @@
-from psychopy import visual, core, event, sound
-import psychtoolbox as ptb
 from random import randrange
+
+import psychtoolbox as ptb
+from psychopy import visual, core, event, sound
 
 
 class Signal:
@@ -28,9 +29,9 @@ mouse = event.Mouse(win=win)
 go_signal = Signal(win, image='../Assets/Images/goSignal.png')
 no_go_signal = Signal(win, image='../Assets/Images/stopStimulus.png')
 
-trial_sound = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
-good_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
-bad_click = sound.Sound('../Assets/Sounds/negativeReinforcement.wav')
+trial_sound = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
+good_click = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
+bad_click = sound.Sound('../Assets/sounds/negativeReinforcement.wav')
 
 
 def draw(_signal, _is_signal_on_right):
