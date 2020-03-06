@@ -44,21 +44,29 @@ class SSPageWidget(glooey.Widget):
 
         scroll_box = widgets.ScrollBox()
 
-        vbox = glooey.VBox()
+        grid = glooey.Grid()
+        grid.set_width_hint(1000)
+        grid.set_row_height(0, 500)
+        grid.set_row_height(1, 75)
 
         self.default_button = widgets.DefaultButton("New Subject")
-        vbox.add(self.default_button)
+        #vbox.add(self.default_button)
 
-        scroll_box.add(vbox)
+        #scroll_box.add(vbox)
 
         #hbox = glooey.HBox()
 
         #hbox.add(scroll_box)
 
         self.parameter_fields = ParameterFields()
-        #hbox.add(ParameterFields())
 
-        self._attach_child(self.parameter_fields)
+        grid[0, 0] = self.parameter_fields
+
+        self.start_button = widgets.AltButton("Start Trial")
+
+        grid[1, 0] = self.start_button
+
+        self._attach_child(grid)
 
 
 class SSPage(Page):
