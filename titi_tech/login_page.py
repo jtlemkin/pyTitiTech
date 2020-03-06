@@ -7,7 +7,7 @@ from page import Page
 
 class TitiImage(glooey.Background):
     titi_image = pyglet.resource.image('TitiMonkeys.png')
-    titi_image.height = 200
+    titi_image.height = 300
     titi_image.width = titi_image.height
 
     custom_image = titi_image
